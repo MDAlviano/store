@@ -35,6 +35,8 @@ class ItemAdapter(private val items: List<Item>, private val onClick: (Item) -> 
         holder.desc.text = item.description
         holder.price.text = "Rp${item.price}.00"
 
+        holder.itemView.setOnClickListener { onClick(item) }
+
         val imageUrl = "http://10.0.2.2:5000/api/Home/Item/Photo/${item.id}"
 
         Thread {

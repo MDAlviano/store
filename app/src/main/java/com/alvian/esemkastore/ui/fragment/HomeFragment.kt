@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -31,13 +32,18 @@ class HomeFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
         rvItems = view.findViewById(R.id.rvItems)
 
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val name = arguments?.getString("NAME")
         view.findViewById<TextView>(R.id.tvName).text = "Welcome $name"
 
         setupRv()
         loadItems()
 
-        return view
     }
 
     private fun loadItems() {
@@ -61,6 +67,14 @@ class HomeFragment : Fragment() {
 
     private fun setupRv() {
         val itemAdapter = ItemAdapter(items) {
+            val fDetail = DetailItemFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("ITEM", it)
+            fDetail.arguments = bundle
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fDetail, DetailItemFragment::class.java.simpleName)
+                .commit()
 
         }
         rvItems.apply {

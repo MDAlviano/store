@@ -1,17 +1,25 @@
 package com.alvian.esemkastore.ui.activity
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.MutableLiveData
 import com.alvian.esemkastore.R
 import com.alvian.esemkastore.ui.fragment.HomeFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var tvCartCount: TextView
+
+    private val cartItemCount = MutableLiveData<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tvCartCount = findViewById(R.id.tvCartCount)
 
         val id = intent.getIntExtra("ID", 0)
         val name = intent.getStringExtra("NAME")
@@ -26,5 +34,20 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, fHome, HomeFragment::class.java.simpleName)
             .commit()
 
+        observeCartChanges()
+
+        cartItemCount.value = 0
+
     }
+
+    private fun observeCartChanges() {
+        cartItemCount.observe(this) { count ->
+            tvCartCount.text = "CART($count)"
+        }
+    }
+
+    fun updateCartCount(count: Int) {
+        cartItemCount.value = count
+    }
+
 }

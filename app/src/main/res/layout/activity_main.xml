@@ -22,6 +22,7 @@
         android:layout_alignParentBottom="true">
 
         <LinearLayout
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -29,6 +30,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/textHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
@@ -38,6 +40,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/navCart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -53,12 +56,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/navHistory"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/textHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HISTORY"

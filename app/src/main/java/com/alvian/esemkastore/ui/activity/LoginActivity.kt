@@ -49,7 +49,6 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(it)
                         }
                     }
-
                 } else {
                     Toast.makeText(this, "Username or password wrong!", Toast.LENGTH_SHORT).show()
                 }
